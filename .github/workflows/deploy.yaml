@@ -1,0 +1,45 @@
+name: Deploy to Cloud Run
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  PROJECT_ID: prefab-mapper-466606-d8
+  SERVICE_ACCOUNT_EMAIL: github-actions-test@prefab-mapper-466606-d8.iam.gserviceaccount.com
+  REGION: us-central1
+  REPO: hello-repo
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          token_format: access_token
+          workload_identity_provider: 'projects/495059377885/locations/global/workloadIdentityPools/github-pool1/providers/github-provider'
+          service_account: ${{ env.SERVICE_ACCOUNT_EMAIL }}
+
+      - name: Setup gcloud CLI
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ env.PROJECT_ID }}
+
+      - name: Build and Deploy to Cloud Run
+        run: |
+          gcloud builds submit --tag $REGION-docker.pkg.dev/$PROJECT_ID/$REPO/hello-app
+          gcloud run deploy hello-app \
+            --image $REGION-docker.pkg.dev/$PROJECT_ID/$REPO/hello-app \
+            --platform managed \
+            --region $REGION \
+            --allow-unauthenticated
