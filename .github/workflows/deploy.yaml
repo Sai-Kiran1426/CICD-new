@@ -37,9 +37,9 @@ jobs:
 
       - name: Build and Deploy to Cloud Run
         run: |
-          gcloud builds submit --tag $REGION-docker.pkg.dev/$PROJECT_ID/$REPO/hello-app
-          gcloud run deploy hello-app \
-            --image $REGION-docker.pkg.dev/$PROJECT_ID/$REPO/hello-app \
+          gcloud builds submit --tag $REGION-docker.pkg.dev/$PROJECT_ID/$REPO/hello-app1
+          gcloud run deploy hello-app1 \
+            --image $REGION-docker.pkg.dev/$PROJECT_ID/$REPO/hello-app1 \
             --platform managed \
             --region $REGION \
             --allow-unauthenticated
