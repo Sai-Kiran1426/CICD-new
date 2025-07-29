@@ -32,7 +32,7 @@ gcloud iam workload-identity-pools create github-pool1 \
   --display-name="GitHub Actions Provider" \
   --issuer-uri="https://token.actions.githubusercontent.com" \
   --attribute-mapping="google.subject=assertion.sub,attribute.repository=assertion.repository" \
-  --attribute-condition="attribute.repository == 'shashivadhan/pubsub'"
+  --attribute-condition="attribute.repository == 'Sai-Kiran1426/CICD-new'"
 
   # Allow GitHub to impersonate your service account
 gcloud iam service-accounts add-iam-policy-binding github-actions@your-gcp-project-id.iam.gserviceaccount.com \
