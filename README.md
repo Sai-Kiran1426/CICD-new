@@ -40,6 +40,16 @@ gcloud iam service-accounts add-iam-policy-binding github-actions@your-gcp-proje
   --member="principalSet://iam.googleapis.com/projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/github-pool/attribute.repository/your-github-username/your-repo-name"
 
 
+  Need to create deploy.yaml file
+
+  .github/workflows/deploy.yaml - format for creating yaml file
+
+  In deploy.yaml file we need to replace the project-id, service-account email, repo-name, WIF pool, WIF provider then click on commit changes.
+  Once we click on commit changes.
+
+  There will be Action running. Now you ca go to the Actions tab and check it.
+
+
 
   
 
